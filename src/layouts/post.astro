@@ -10,8 +10,8 @@ import { SITE } from '@/config';
 import { parseTitle, sortPosts, getIndex } from '@/util';
 
 export interface Props {
-	frontmatter: { date: string; pic: string; desc: string; url: string; twitterImg: string };
-	title: string;
+  frontmatter: { date: string; pic: string; desc: string; url: string; twitterImg: string };
+  title: string;
 }
 
 const pageUrl = new URL(Astro.request.url);
@@ -21,10 +21,10 @@ let title = parseTitle(currentPage);
 
 const { date, pic, desc, url, twitterImg } = Astro.props.frontmatter;
 const content = {
-	title,
-	image: pic,
-	description: desc,
-	twitterImg,
+  title,
+  image: pic,
+  description: desc,
+  twitterImg,
 };
 const currentUrl = SITE.homePage + currentPage;
 
@@ -32,13 +32,19 @@ const currentUrl = SITE.homePage + currentPage;
 const posts = await Astro.glob('../pages/posts/*.md');
 const allPosts = sortPosts(posts);
 const postIndex = getIndex(currentPage);
+
+console.log('posts:', posts);
+console.log('allPosts:', allPosts);
+console.log('postIndex:', postIndex);
+
 let nextUrl = '';
-if (postIndex > 2) {
-	nextUrl = allPosts[allPosts.length - postIndex + 1].url;
+if (postIndex > 2 && allPosts[allPosts.length - postIndex + 1]?.url) {
+  nextUrl = allPosts[allPosts.length - postIndex + 1].url;
 }
+
 let prevUrl = '';
-if (postIndex < allPosts.length) {
-	prevUrl = allPosts[allPosts.length - postIndex - 1].url;
+if (postIndex < allPosts.length && allPosts[allPosts.length - postIndex - 1]?.url) {
+  prevUrl = allPosts[allPosts.length - postIndex - 1].url;
 }
 ---
 
