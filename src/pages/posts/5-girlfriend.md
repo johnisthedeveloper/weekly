@@ -1,5 +1,6 @@
 ---
 date: 2024/07/15
+youtube: https://www.youtube.com/watch?v=u1DCBy2ViW8
 ---
 
 <img src="https://gw.alipayobjects.com/zos/k/bn/185.jpg" width="800" />

@@ -1,0 +1,84 @@
+---
+export interface Props {
+  videoId: string;
+}
+
+const { videoId } = Astro.props;
+---
+
+<div class="youtube-player mt-4 mb-6">
+  <div class="video-frame mb-4 border border-gray-300 rounded-lg overflow-hidden">
+    <div id="youtubePlayerContainer" class="aspect-video"></div>
+    <div class="p-4 bg-gray-100">
+      <h3 id="videoTitle" class="text-lg font-semibold mb-2"></h3>
+      <a id="videoUrl" href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline"></a>
+    </div>
+  </div>
+  <button id="toggleVideo" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+    播放背景音乐
+  </button>
+</div>
+
+<script define:vars={{ videoId }}>
+  let player;
+  let isPlaying = false;
+
+  function loadYouTubeAPI() {
+    return new Promise((resolve) => {
+      if (window.YT) {
+        resolve();
+      } else {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        window.onYouTubeIframeAPIReady = resolve;
+      }
+    });
+  }
+
+  async function initializePlayer() {
+    await loadYouTubeAPI();
+
+    player = new YT.Player('youtubePlayerContainer', {
+      height: '100%',
+      width: '100%',
+      videoId: videoId,
+      playerVars: {
+        'playsinline': 1,
+        'controls': 1,
+        'disablekb': 0,
+        'fs': 1,
+        'modestbranding': 1,
+        'rel': 0
+      },
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    const toggleButton = document.getElementById("toggleVideo");
+    const videoTitle = document.getElementById("videoTitle");
+    const videoUrl = document.getElementById("videoUrl");
+
+    // Set video title and URL
+    videoTitle.textContent = player.getVideoData().title;
+    videoUrl.textContent = `https://www.youtube.com/watch?v=${videoId}`;
+
+    toggleButton.addEventListener("click", function() {
+      if (isPlaying) {
+        player.pauseVideo();
+        isPlaying = false;
+        this.textContent = "播放背景音乐";
+      } else {
+        player.playVideo();
+        isPlaying = true;
+        this.textContent = "暂停背景音乐";
+      }
+    });
+  }
+
+  initializePlayer();
+</script>

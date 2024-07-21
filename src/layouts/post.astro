@@ -6,11 +6,19 @@ import Footer from '../components/Footer.astro';
 import AstroLogo from '../components/Header/AstroLogo.astro';
 import LeftSidebar from '../components/LeftSidebar.astro';
 import Search from '../components/Header/Search.astro';
+import YouTubePlayer from '../components/YouTubePlayer.astro';
 import { SITE } from '@/config';
 import { parseTitle, sortPosts, getIndex } from '@/util';
 
 export interface Props {
-  frontmatter: { date: string; pic: string; desc: string; url: string; twitterImg: string };
+  frontmatter: { 
+    date: string; 
+    pic: string; 
+    desc: string; 
+    url: string; 
+    twitterImg: string;
+    youtube?: string;
+  };
   title: string;
 }
 
@@ -19,7 +27,7 @@ const currentPage = pageUrl.pathname;
 
 let title = parseTitle(currentPage);
 
-const { date, pic, desc, url, twitterImg } = Astro.props.frontmatter;
+const { date, pic, desc, url, twitterImg, youtube } = Astro.props.frontmatter;
 const content = {
   title,
   image: pic,
@@ -33,10 +41,6 @@ const posts = await Astro.glob('../pages/posts/*.md');
 const allPosts = sortPosts(posts);
 const postIndex = getIndex(currentPage);
 
-console.log('posts:', posts);
-console.log('allPosts:', allPosts);
-console.log('postIndex:', postIndex);
-
 let nextUrl = '';
 if (postIndex > 2 && allPosts[allPosts.length - postIndex + 1]?.url) {
   nextUrl = allPosts[allPosts.length - postIndex + 1].url;
@@ -46,6 +50,9 @@ let prevUrl = '';
 if (postIndex < allPosts.length && allPosts[allPosts.length - postIndex - 1]?.url) {
   prevUrl = allPosts[allPosts.length - postIndex - 1].url;
 }
+
+// Extract YouTube video ID if URL is provided
+const videoId = youtube ? new URL(youtube).searchParams.get('v') : null;
 ---
 
 <html lang='ch'>
@@ -199,6 +206,9 @@ if (postIndex < allPosts.length && allPosts[allPosts.length - postIndex - 1]?.ur
 						<span data-pagefind-meta='title'>{title}</span>
 						<Search />
 					</h1>
+					
+					{videoId && <YouTubePlayer videoId={videoId} />}
+					
 					<slot />
 					<div class='flex align-middle justify-center mt-4'>
 						<a
