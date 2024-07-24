@@ -9,7 +9,7 @@ youtube: https://www.youtube.com/watch?v=1I-sq9oA9PI
 
 > **2024.07.24 周三**
 
-## 潮流工具
+## 去全球化时代的未来，在于学习新事物，请拥抱未来
 
 **朋友做了一个超级好看的 Mac 暗色主题**  
 <https://producthunt.com/posts/darkos-icon-pack>  
