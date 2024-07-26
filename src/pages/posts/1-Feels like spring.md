@@ -11,6 +11,8 @@ youtube: https://www.youtube.com/watch?v=1I-sq9oA9PI
 
 ### 去全球化时代的未来，在于学习新事物，请拥抱未来
 
+![alt text](image.png)
+
 **朋友做了一个超级好看的 Mac 暗色主题**  
 <https://producthunt.com/posts/darkos-icon-pack>  
 好友 Viggo 两年前做的一套 Mac 图标发布到 ProductHunt 了,现在可以免费下载用了，想黑化桌面的可以下载试试，兑换码在 ProductHunt 的截图这里，点击复制到购买界面输入就可以免费下载！整理了 330+ 的 Mac 端 APP，比较适合开发者和设计师，文件大小 711.9 MB，配套做了 20 个壁纸，我已经用上了，很喜欢！  
