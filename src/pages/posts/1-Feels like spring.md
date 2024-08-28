@@ -9,7 +9,9 @@ youtube: https://www.youtube.com/watch?v=1I-sq9oA9PI
 
 > **2024.07.24 周三**
 
-### 去全球化时代的未来，在于学习新事物，请拥抱未来
+# 去全球化时代的未来
+## 在于学习新事物
+### 请拥抱未来
 
 ![alt text](i001image.png)
 
